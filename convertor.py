@@ -2,6 +2,41 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+# Custom CSS
+st.markdown("""
+    <style>
+        body {
+            background-color: #0e1117;
+            color: #ffffff;
+        }
+        .stApp {
+            background-color: #0e1117;
+        }
+        .stTextInput, .stNumberInput, .stSelectbox {
+            background-color: #1c1f26;
+            color: #ffffff;
+            border-radius: 10px;
+        }
+        .stButton>button {
+            background-color: #ff4b4b;
+            color: white;
+            border-radius: 10px;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .stButton>button:hover {
+            background-color: #ff7878;
+        }
+        .stSuccess {
+            background-color: #00c853;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Conversion factors
 data = {
     "Length": {"meter": 1, "kilometer": 0.001, "centimeter": 100, "mile": 0.000621371},
@@ -30,8 +65,8 @@ def convert(value, from_unit, to_unit, category):
     else:
         return value * data[category][to_unit] / data[category][from_unit]
 
-st.title("Unit Converter")
-st.write("Made by Anabia")
+st.title("🔄 Unit Converter")
+st.write("Made by Noman")
 
 category = st.selectbox("Select Category", list(data.keys()))
 
