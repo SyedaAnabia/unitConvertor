@@ -6,33 +6,39 @@ import plotly.express as px
 st.markdown("""
     <style>
         body {
-            background-color: #0e1117;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
             color: #ffffff;
         }
         .stApp {
-            background-color: #0e1117;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: white;
         }
         .stTextInput, .stNumberInput, .stSelectbox {
-            background-color: #1c1f26;
+            background-color: #2c2c54;
             color: #ffffff;
             border-radius: 10px;
+            padding: 8px;
         }
         .stButton>button {
-            background-color: #ff4b4b;
+            background-color: #3498db;
             color: white;
-            border-radius: 10px;
+            border-radius: 12px;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 16px;
+            transition: 0.3s;
         }
         .stButton>button:hover {
-            background-color: #ff7878;
+            background-color: #2980b9;
+            transform: scale(1.05);
         }
         .stSuccess {
-            background-color: #00c853;
+            background-color: #00e676;
             color: white;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: bold;
+            text-align: center;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -65,23 +71,23 @@ def convert(value, from_unit, to_unit, category):
     else:
         return value * data[category][to_unit] / data[category][from_unit]
 
-st.title("🔄 Unit Converter")
-st.write("Made by Noman")
+st.title("🚀 Stylish Unit Converter")
+st.write("💡 Made by Anabia")
 
-category = st.selectbox("Select Category", list(data.keys()))
+category = st.selectbox("📌 Select Category", list(data.keys()))
 
 if category == "Temperature":
-    from_unit = st.selectbox("From Unit", list(data[category].keys()))
-    to_unit = st.selectbox("To Unit", list(data[category].keys()))
+    from_unit = st.selectbox("🌡️ From Unit", list(data[category].keys()))
+    to_unit = st.selectbox("🌡️ To Unit", list(data[category].keys()))
 else:
-    from_unit = st.selectbox("From Unit", df[category]["Unit"].tolist())
-    to_unit = st.selectbox("To Unit", df[category]["Unit"].tolist())
+    from_unit = st.selectbox("📏 From Unit", df[category]["Unit"].tolist())
+    to_unit = st.selectbox("📏 To Unit", df[category]["Unit"].tolist())
 
-value = st.number_input("Enter Value", min_value=0.0, format="%.2f")
+value = st.number_input("✏️ Enter Value", min_value=0.0, format="%.2f")
 converted_value = convert(value, from_unit, to_unit, category)
-st.success(f"Converted Value: {converted_value} {to_unit}")
+st.success(f"✅ Converted Value: {converted_value} {to_unit}")
 
 # Plotly Visualization
 if category != "Temperature":
-    fig = px.bar(df[category], x="Unit", y="Factor", title=f"Conversion Factors for {category}")
+    fig = px.bar(df[category], x="Unit", y="Factor", title=f"📊 Conversion Factors for {category}", color="Unit")
     st.plotly_chart(fig)
